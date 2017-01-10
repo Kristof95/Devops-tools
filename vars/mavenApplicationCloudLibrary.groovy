@@ -1,4 +1,4 @@
-#!usr/bin/groovy
+
 def call(body){
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
@@ -7,7 +7,7 @@ def call(body){
 	
 	node {
 		stage('Checkout'){
-			checkout scm
+			git url: "https://github.com/Kristof95/word-collector.git"
 		}
 		
 		stage('Build'){
