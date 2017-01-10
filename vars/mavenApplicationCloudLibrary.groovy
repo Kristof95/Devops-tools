@@ -23,7 +23,7 @@ def call(body){
 		stage('Deploy to Cloud Foundry'){
 			sh """
 				password=`cat pw`
-				cf login -a $apiEndPoint -o "devops-app-test" -s "development" -u $cloudUsername -p $password
+				cf login -a $apiEndPoint -o devops-app-test -s development -u $cloudUsername -p $password
 				cf push $cloudApplicationName -m 512M -p target/backend-template-0.0.1-SNAPSHOT.jar
 				cf start $cloudApplicationName
 			   """
