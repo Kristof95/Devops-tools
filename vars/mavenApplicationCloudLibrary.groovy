@@ -7,7 +7,7 @@ def call(body){
 	
 	node {
 		stage('Checkout'){
-			git url: "https://github.com/Kristof95/word-collector.git"
+			checkout scm
 		}
 		
 		stage('Build'){
