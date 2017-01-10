@@ -20,7 +20,7 @@ def call(body){
 			sh '''
 				password=`cat pw`
 				cf login -a "${config.apiEndPoint}" -o "devops-app-test" -s "development" -u "${config.cloudUsername}" -p "$password"
-				cf push word-gather -m 512M -p target/backend-template-0.0.1-SNAPSHOT.jar
+				cf push "${config.cloudApplicationName}" -m 512M -p target/backend-template-0.0.1-SNAPSHOT.jar
 				cf start "${config.cloudApplicationName}"
 			   '''
 		}
