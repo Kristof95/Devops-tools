@@ -24,6 +24,12 @@ def call(body){
 			echo "$apiEndPoint"
 			echo "$cloudUsername"
 			echo "$cloudApplicationName"
+			sh '''
+				password=`cat pw`
+				cf login -a "$apiEndPoint" -o "devops-app-test -s "development" -u "$cloudUsername" -p "$password"
+				cf push "$cloudApplicationName" -m 512M -p target/backend-template-0.0.1-SNAPSHOT.jar
+				cf start "$cloudApplicationName"
+			   '''
 			
 		}
 		
