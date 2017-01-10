@@ -1,4 +1,4 @@
-
+#!usr/bin/groovy
 def call(body){
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
@@ -21,9 +21,9 @@ def call(body){
 		}
 		
 		stage('Deploy to Cloud Foundry'){
-			echo $apiEndPoint
-			echo $cloudUsername
-			echo $cloudApplicationName
+			echo "$apiEndPoint"
+			echo "$cloudUsername"
+			echo "$cloudApplicationName"
 			
 		}
 		
