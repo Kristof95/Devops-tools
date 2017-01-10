@@ -22,7 +22,7 @@ def call(body){
 		
 		stage('Deploy to Cloud Foundry'){
 			sh """
-				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p "@nOtherday95"
+				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p ""
 				cf delete "$cloudApplicationName" -f
 				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
 				cf start "$cloudApplicationName"
