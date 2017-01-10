@@ -5,6 +5,10 @@ def call(body){
     body.delegate = config
     body()
 	
+	def apiEndPoint = config.apiEndPoint
+	def cloudUsername = config.cloudUsername
+	def cloudApplicationName = config.cloudApplicationName
+	
 	node {
 		stage('Checkout'){
 			checkout scm
@@ -17,12 +21,12 @@ def call(body){
 		}
 		
 		stage('Deploy to Cloud Foundry'){
-			sh '''
+			sh """
 				password=`cat pw`
-				cf login -a ${config.apiEndPoint} -o "devops-app-test" -s "development" -u ${config.cloudUsername} -p $password
-				cf push ${config.cloudApplicationName} -m 512M -p target/backend-template-0.0.1-SNAPSHOT.jar
-				cf start ${config.cloudApplicationName}
-			   '''
+				cf login -a $apiEndPoint -o "devops-app-test" -s "development" -u $cloudUsername -p $password
+				cf push $cloudApplicationName -m 512M -p target/backend-template-0.0.1-SNAPSHOT.jar
+				cf start $cloudApplicationName
+			   """
 		}
 		
 		stage('Application Status'){
