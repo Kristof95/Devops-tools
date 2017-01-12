@@ -8,8 +8,8 @@ def call(body){
 	def apiEndPoint = config.apiEndPoint
 	def cloudUsername = config.cloudUsername
 	def cloudApplicationName = config.cloudApplicationName
-	def targetContainers = config.targetContainers
-	
+	def targetContainsers = config.targetContainsers
+
 	node {
 		stage('Checkout'){
 			checkout scm
