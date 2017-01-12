@@ -28,7 +28,12 @@ def call(body){
 				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
 				cf start "$cloudApplicationName"
 			   """
-			
+			for(entry in targetContainers){
+				def host = entry["host"]
+				def port = entry["port"]
+				def serviceName = entry["serviceName"]
+				println ${host}+":"+${port}+"\t"+${serviceName}
+			}
 		}
 		
 		stage('Application Status'){
