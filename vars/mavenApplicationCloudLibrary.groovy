@@ -26,7 +26,7 @@ def call(body){
 				def host = entry["host"]
 				def port = entry["port"]
 				def serviceName = entry["serviceName"]
-				echo "${host}:${port} ${serviceName}"
+				println ${host}+":"+${port}+"\t"+${serviceName}
 			}
 //		def password = readFile("pw")
 //			sh """
@@ -38,7 +38,7 @@ def call(body){
 		}
 		
 		stage('Application Status'){
-			sh "cf apps"
+//			sh "cf apps"
 		}
 	}
 }
