@@ -27,14 +27,15 @@ def call(body){
 				def port = entry["port"]
 				def serviceName = entry["serviceName"]
 				println host+":"+port+"\t"+serviceName
+				echo "$host"
 			}
-//		def password = readFile("pw")
-//			sh """
-//				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p "$password"
-//				cf delete "$cloudApplicationName" -f
-//				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
-//				cf start "$cloudApplicationName"
-//			   """
+		def password = readFile("pw")
+			sh """
+				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p "$password"
+				cf delete "$cloudApplicationName" -f
+				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
+				cf start "$cloudApplicationName"
+			   """
 		}
 		
 		stage('Application Status'){
