@@ -8,7 +8,7 @@ def call(body){
 	def apiEndPoint = config.apiEndPoint
 	def cloudUsername = config.cloudUsername
 	def cloudApplicationName = config.cloudApplicationName
-	def targetContainsers = config.targetContainsers
+	def targetContainers = config.targetContainsers
 
 	node {
 		stage('Checkout'){
