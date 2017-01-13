@@ -34,7 +34,7 @@ def call(body){
 			if(targetContainer)
 			{
 				def content = targetContainer["develop"]
-				echo $content
+				echo "$content"
 			}
 			if(!targetContainer2)
 			{
