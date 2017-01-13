@@ -31,9 +31,10 @@ def call(body){
 //				cf start "$cloudApplicationName"
 //			   """
 
-			if(!targetContainer)
+			if(targetContainer)
 			{
-				echo "empty"
+				def content = targetContainer["develop"]
+				echo $content
 			}
 			if(!targetContainer2)
 			{
