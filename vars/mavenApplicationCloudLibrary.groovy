@@ -8,7 +8,8 @@ def call(body){
 	def apiEndPoint = config.apiEndPoint
 	def cloudUsername = config.cloudUsername
 	def cloudApplicationName = config.cloudApplicationName
-	def targetContainers = config.targetContainsers
+	def targetContainer = config.targetContainer
+	def targetContainer2 = config.targetContainer2
 
 	node {
 		stage('Checkout'){
@@ -22,24 +23,26 @@ def call(body){
 		}
 		
 		stage('Deploy to Cloud Foundry'){
-		for(entry in targetContainers){
-				def host = entry["host"]
-				def port = entry["port"]
-				def serviceName = entry["serviceName"]
-				println host+":"+port+"\t"+serviceName
-				echo "$host"
+//		def password = readFile("pw")
+//			sh """
+//				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p "$password"
+//				cf delete "$cloudApplicationName" -f
+//				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
+//				cf start "$cloudApplicationName"
+//			   """
+
+			if(!targetContainer)
+			{
+				echo "empty"
 			}
-		def password = readFile("pw")
-			sh """
-				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p "$password"
-				cf delete "$cloudApplicationName" -f
-				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
-				cf start "$cloudApplicationName"
-			   """
+			if(!targetContainer2)
+			{
+				echo "null"
+			}
 		}
 		
 		stage('Application Status'){
-//			sh "cf apps"
+			sh "cf apps"
 		}
 	}
 }
