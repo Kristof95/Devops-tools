@@ -17,9 +17,9 @@ def call(body){
 		}
 		
 		stage('Build'){
-//			withEnv(["PATH+MAVEN=${tool 'M3'}"]){
-//				sh 'mvn clean install'
-//			}
+			withEnv(["PATH+MAVEN=${tool 'M3'}"]){
+				sh 'mvn clean install'
+			}
 		}
 		
 		stage('Deploy to Cloud Foundry'){
