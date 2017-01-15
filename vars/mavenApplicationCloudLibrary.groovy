@@ -18,7 +18,7 @@ def call(body){
 		
 		stage('Build'){
 			withEnv(["PATH+MAVEN=${tool 'M3'}"]){
-				sh 'mvn clean install'
+				sh 'mvn clean install -X'
 			}
 		}
 		
@@ -36,6 +36,7 @@ def call(body){
 				def content = targetContainer["develop"]
 				echo "$content"
 			}
+			echo "$targetContainer2"
 			if(!targetContainer2)
 			{
 				echo "null"
