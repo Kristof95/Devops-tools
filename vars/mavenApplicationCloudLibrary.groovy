@@ -34,7 +34,7 @@ def call(body){
 		
 		stage('Create docker image && Run docker container'){
 			dir('src/main/docker'){
-				docker.build("Dockerfile:word")
+				docker.build("arungupta/docker-jenkins-pipeline:word")
 			}
 		}
 		
@@ -44,7 +44,7 @@ def call(body){
 		
 		stage('Run container'){
 			dir('src/main/docker'){
-				sh "docker run word -p 8090:8080"
+				sh "docker run arungupta/docker-jenkins-pipeline:word-p 8090:8080"
 			}
 		}
 	}
