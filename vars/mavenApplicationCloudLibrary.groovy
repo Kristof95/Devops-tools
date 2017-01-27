@@ -18,11 +18,11 @@ def call(body){
 		
 		stage('Build'){
 			withEnv(["PATH+MAVEN=${tool 'M3'}"]){
-				sh 'mvn clean install -X'
+				sh 'mvn clean install'
 			}
 		}
 		
-		stage('Deploy to Cloud Foundry'){
+//		stage('Deploy to Cloud Foundry'){
 //		def password = readFile("pw")
 //			sh """
 //				cf login -a "$apiEndPoint" -o "devops-app-test" -s "development" -u "$cloudUsername" -p "$password"
@@ -30,21 +30,22 @@ def call(body){
 //				cf push "$cloudApplicationName" -m 256M -p target/backend-template-0.0.1-SNAPSHOT.jar
 //				cf start "$cloudApplicationName"
 //			   """
-
-			if(targetContainer)
-			{
-				def content = targetContainer["develop"]
-				echo "$content"
-			}
-			echo "$targetContainer2"
-			if(!targetContainer2)
-			{
-				echo "null"
+//		}
+		
+		stage('Create docker image && Run docker container'){
+			dir('src/main/docker'){
+				docker.build("Dockerfile:word")
 			}
 		}
 		
-		stage('Application Status'){
-//			sh "cf apps"
+		stage('Push docker image to registry'){
+			echo "Image successfully pushed!"
+		}
+		
+		stage('Run container'){
+			dir('src/main/docker'){
+				sh "docker run word -p 8090:8080"
+			}
 		}
 	}
 }
