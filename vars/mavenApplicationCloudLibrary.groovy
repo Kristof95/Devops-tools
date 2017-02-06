@@ -9,6 +9,11 @@ body()
 		stage('Hello'){
 			echo "master"
 		}
-
+		
+		stage('HEAD Rev'){
+			sh 'git rev-parse HEAD > commit'
+			def commit = readFile('commit').trim()
+			println commit
+		}
 	}
 }
