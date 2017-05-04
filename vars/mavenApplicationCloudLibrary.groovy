@@ -9,7 +9,7 @@ def call(body) {
     node {
 
         stage('Hello') {
-            echo "Hy from master branch"
+            echo "Hy from $env.BRANCH_NAME branch"
         }
 
         stage('Set shared library branch') {
