@@ -24,7 +24,7 @@ def call(body) {
 
 static void addSharedLibraryBranch(String branch) {
     def issueNumber = branch.split("/")[1]
-    def sharedLibBranch = """@Library("pipeline-shared-lib@$branch")"""
+    def sharedLibBranch = """@Library("pipeline-shared-lib@$branch") _"""
     def jenkinsFile = readFile "Jenkinsfile"
     def newContent = jenkinsFile.replace(jenkinsFile, "$sharedLibBranch\n$jenkinsFile")
     def credential = readFile '/var/jenkins_home/workspace/cred'
