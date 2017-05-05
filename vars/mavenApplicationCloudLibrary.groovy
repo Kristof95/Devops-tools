@@ -25,7 +25,6 @@ def call(body) {
                 echo "Content: $newContent"
                 writeFile file: "Jenkinsfile.txt", text: "$newContent"
                 sh """
-                    git config remote.origin.url https://Kristof95:$pw@github.com/Kristof95/devops_test_repo.git
                     git checkout "$branch"
                     git add .
                     git commit -m "$issueNumber set shared library branch in Jenkinsfile"
