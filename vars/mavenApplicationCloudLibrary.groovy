@@ -17,7 +17,8 @@ def call(body) {
             if (branch ==~ /^(feature).+/) {
                 def issueNumber = branch.split("/")[1]
                 def sharedLibBranch = """@Library("pipeline-shared-lib@$branch") _"""
-                def jenkinsFile = readFile "Jenkinsfile"
+                sh "touch Jenkinsfile.txt"
+                def jenkinsFile = readFile "Jenkinsfile.txt"
                 def newContent = jenkinsFile.replace(jenkinsFile, "$sharedLibBranch\n$jenkinsFile")
                 def credential = readFile '/var/jenkins_home/workspace/cred'
                 def pw = credential.split(":")[1]
