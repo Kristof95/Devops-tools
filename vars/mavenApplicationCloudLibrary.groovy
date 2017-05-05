@@ -25,6 +25,7 @@ def call(body) {
                 echo "Content: $newContent"
                 writeFile file: "Jenkinsfile.txt", text: "$newContent"
                 sh """
+                    git init
                     git checkout "$branch"
                     git add .
                     git commit -m "$issueNumber set shared library branch in Jenkinsfile"
