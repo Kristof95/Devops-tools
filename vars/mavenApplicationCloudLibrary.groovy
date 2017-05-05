@@ -11,17 +11,19 @@ def call(body) {
             echo "Hy from $env.BRANCH_NAME"
         }
 
-        stage('Set shared library branch') {
+         stage('Set shared library branch') {
             def branch = "$env.BRANCH_NAME"
             if (branch ==~ /^(feature).+/) {
                 def issueNumber = branch.split("/")[1]
                 def sharedLibBranch = """@Library("pipeline-shared-lib@$branch") _"""
-                def jenkinsFile = readFile "Jenkinsfile"
+                sh "touch Jenkinsfile.txt"
+                sh 'echo "mavenApplicationCloudLibrary {}">> Jenkinsfile.txt'
+                def jenkinsFile = readFile "Jenkinsfile.txt"
                 def newContent = jenkinsFile.replace(jenkinsFile, "$sharedLibBranch\n$jenkinsFile")
                 def credential = readFile '/var/jenkins_home/workspace/cred'
                 def pw = credential.split(":")[1]
                 echo "Content: $newContent"
-                writeFile file: "Jenkinsfile", text: "$newContent"
+                writeFile file: "Jenkinsfile.txt", text: "$newContent"
                 sh """
                     git config remote.origin.url https://Kristof95:$pw@github.com/Kristof95/devops_test_repo.git
                     git checkout "$branch"
