@@ -23,7 +23,7 @@ def call(body) {
                 def credential = readFile '/var/jenkins_home/workspace/cred'
                 def pw = credential.split(":")[1]
                 echo "Content: $newContent"
-                writeFile file: "Jenkinsfile.txt", text: "$newContent"
+                writeFile file: "Jenkinsfile", text: "$newContent"
                 sh """
                     git init
                     git checkout "$branch"
